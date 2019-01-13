@@ -1,17 +1,14 @@
 //for printf
 #include <stdio.h>
 
-//for strcmp
-#include <string.h>
-
 #define COMMANDMAX 10000
-//#define TRUE 1
-//#define FALSE 0
+#define TRUE 1
+#define FALSE 0
 
 int printarray(char array[], int arraysize)
 {
 	int temp;
-	for (temp = 0; temp < arraysize - 1; temp++)
+	for (temp = 0; temp < arraysize; temp++)
 	{
 		if (array[temp] == '\0')
 		{
@@ -25,28 +22,26 @@ int printarray(char array[], int arraysize)
 	return 0;
 }
 
-/*
 int comparechararrays(char array1[], int array1size, char array2[], int array2size)
 {
 	int temp;
-	for (temp = 0; temp < array1size - 1 && temp < array2size - 1; temp++)
+	for (temp = 0; temp < array1size && temp < array2size; temp++)
 	{
 		if (array1[temp] != array2[temp])
 		{
 			break;
 		}
-		if (array2[temp] == '\0')
+		if (array1[temp] == '\0')
 		{
 			return TRUE;
 		}
 	}
 	return FALSE;
 }
-*/
 
 int runcommand(char array[], int arraysize)
 {
-	if (strcmp(array, "exit") == 0)
+	if (comparechararrays(array, arraysize, "exit", 5))
 	{
 		return 1;
 	}
@@ -63,7 +58,7 @@ int main()
 	printf(">");
 	for (;;)
 	{
-		while ((inputchar = getchar()) != '\n' && commandcounter < COMMANDMAX - 2)
+		while ((inputchar = getchar()) != '\n' && commandcounter < COMMANDMAX - 1)
 		{
 			if (inputchar == '\b')
 			{
