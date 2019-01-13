@@ -1,4 +1,8 @@
+//for printf
 #include <stdio.h>
+
+//for strcmp
+#include <string.h>
 
 #define COMMANDMAX 10000
 
@@ -24,9 +28,32 @@ int printarray(char array[], int arraysize)
 	return 0;
 }
 
+/*
+int comparechararrays(char array1[], int array1size, char array2[], int array2size)
+{
+	int temp;
+	for (temp = 0; temp < array1size - 1 && temp < array2size - 1; temp++)
+	{
+		if (array1[temp] != array2[temp])
+		{
+			break;
+		}
+		if (array2[temp] == '\0')
+		{
+			return TRUE;
+		}
+	}
+	return FALSE;
+}
+*/
+
 int runcommand(char array[], int arraysize)
 {
-	return 1;
+	if (strcmp(command, "exit") == 0)
+	{
+		return 1;
+	}
+	return 0;
 }
 
 int main()
@@ -34,7 +61,7 @@ int main()
 	printf(">");
 	for (;;)
 	{
-		while ((c = getchar()) != '\n' && c != EOF && commandcounter < COMMANDMAX- 1)
+		while ((c = getchar()) != '\n' && c != EOF && commandcounter < COMMANDMAX - 2)
 		{
 			if (c == '\b')
 			{
@@ -57,12 +84,6 @@ int main()
 		}
 		
 		commandreturn = runcommand(command, COMMANDMAX);
-
-		/*
-		switch (commandreturn)
-		{
-		}
-		*/
 		
 		if (commandreturn == 1)
 		{
