@@ -5,11 +5,8 @@
 #include <string.h>
 
 #define COMMANDMAX 10000
-
-char command[COMMANDMAX];
-int commandcounter = 0;
-int commandreturn = 0;
-int c;
+//#define TRUE 1
+//#define FALSE 0
 
 int printarray(char array[], int arraysize)
 {
@@ -49,7 +46,7 @@ int comparechararrays(char array1[], int array1size, char array2[], int array2si
 
 int runcommand(char array[], int arraysize)
 {
-	if (strcmp(command, "exit") == 0)
+	if (strcmp(array, "exit") == 0)
 	{
 		return 1;
 	}
@@ -58,19 +55,24 @@ int runcommand(char array[], int arraysize)
 
 int main()
 {
+	char command[COMMANDMAX];
+	int commandcounter = 0;
+	int commandreturn = 0;
+	int inputchar;
+	
 	printf(">");
 	for (;;)
 	{
-		while ((c = getchar()) != '\n' && c != EOF && commandcounter < COMMANDMAX - 2)
+		while ((inputchar = getchar()) != '\n' && commandcounter < COMMANDMAX - 2)
 		{
-			if (c == '\b')
+			if (inputchar == '\b')
 			{
 				command[commandcounter] = 0;
 				commandcounter--;
 			}
 			else
 			{
-				command[commandcounter] = c;
+				command[commandcounter] = inputchar;
 				commandcounter++;
 			}
 		}
@@ -80,7 +82,7 @@ int main()
 		//todo: move to runcommand()
 		if (printarray(command, COMMANDMAX) == 1)
 		{
-			return -1;
+			return 1;
 		}
 		
 		commandreturn = runcommand(command, COMMANDMAX);
